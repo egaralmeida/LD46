@@ -1,0 +1,7 @@
+
+VSCODE: Unity keeps removing this from csproj. Therefore, I made it read-only (only possible on jams!)
+If it happens to you, add this to your csproj. You'll know the place.
+
+<Reference Include="UnityEngine.UI">
+<HintPath>Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+</Reference>
