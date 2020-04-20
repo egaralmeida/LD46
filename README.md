@@ -1,4 +1,4 @@
-# LD46
+# No Return
  Ludum Dare 46 Game
 
 This repository contains all the files for my entry to the Ludum Dare 46 compo themed "Keep it Alive".
