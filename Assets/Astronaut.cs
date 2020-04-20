@@ -9,32 +9,41 @@ public class Astronaut : MonoBehaviour
     public GameObject myCamera;
     public float sprayLevel = 100;
     public int parts = 0;
-    public int sanity = 100;
+    public int targetParts = 50;
+    public float sanity = 100f;
     public float sprayDecay = 0.1f;
     public float impulseDecay = 25f;
     public float sprayForce = 1f;
     public float impulseForce = 1f;
     public float maxVelocity = 0.632f;
+    public float deathDistance = 40;
     public bool visible = true;
+    public float distanceToOrigin = 0f;
+    public bool startAnimationOver = false;
 
     private Rigidbody2D _rb;
-    private bool _startAnimationOver = false;
+    private Vector2 _originPosition;
 
     // Start is called before the first frame update
     void Start()
     {
         _rb = this.GetComponent<Rigidbody2D>();
+        _originPosition = this.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
         checkBonusValues();
+        goInsane();
+
         Vector3 mousePosition = Input.mousePosition;
         mousePosition.z = Camera.main.nearClipPlane;
         Vector3 mouseToWorld = Camera.main.ScreenToWorldPoint(mousePosition);
 
-        if (_startAnimationOver)
+        distanceToOrigin = Vector2.Distance(this.transform.position, _originPosition);
+
+        if (startAnimationOver)
         {
             Vector2 newCamPos = new Vector2(this.transform.position.x, 0);
             myCamera.transform.position = newCamPos;
@@ -64,7 +73,7 @@ public class Astronaut : MonoBehaviour
         }
         else if (this.transform.position.x > 0)
         {
-            _startAnimationOver = true;
+            startAnimationOver = true;
         }
     }
 
@@ -93,6 +102,12 @@ public class Astronaut : MonoBehaviour
 
         if (parts > 100)
             parts = 100;
+    }
+
+    private void goInsane()
+    {
+        if(startAnimationOver)
+            sanity -= Time.deltaTime;
     }
 
     void OnBecameInvisible()

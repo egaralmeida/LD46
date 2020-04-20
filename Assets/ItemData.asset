@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18bc46fb738ca064290eff12d0d5ca0c, type: 3}
   m_Name: ItemData
   m_EditorClassIdentifier: 
-  partBonusValue: 3
-  sprayBonusValue: 25
+  partBonusValue: 7
+  sprayBonusValue: 30
   sanityValue: 25

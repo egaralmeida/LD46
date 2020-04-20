@@ -8,23 +8,30 @@ public class UIManager : MonoBehaviour
     public RectTransform canvasRectTransform;
     public Text groupUI;
     public GameObject astronaut;
+    public float detectionRange = 10f;
 
     private Transform _currentActive;
     private Item _currentActiveScript;
     private RectTransform _distMeterRectTransform;
+    private Astronaut _astronautScript;
 
     void Start()
     {
         groupUI.enabled = false;
         getCurrentActive();
+
+        _astronautScript = astronaut.GetComponent<Astronaut>();
     }
 
     void Update()
     {
         if (_currentActiveScript.visible)
-        {
             getCurrentActive();
-        }
+
+        if (_currentActiveScript.distanceToAstronaut > detectionRange)
+            groupUI.enabled = false;
+        else
+            groupUI.enabled = true;
     }
 
     void LateUpdate()
